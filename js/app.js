@@ -1,36 +1,66 @@
-///////////////// Задача 1////////////////////////
-const name="Саша";
-const age="14";
-const height="1.75";
-console.log(`Мене звати ${name}, мені ${age} років, мій зріст ${height} см.`);
-//////////////// Задача 2////////////////////////
-const city="Київ";
-const country="Україна";
-const population="2.8 млн";
-const isCapital=true;
-const nothing=null;
-let undefinedVar;
-console.log(`Змінна city має тип: ${typeof city}`);
-console.log(`Змінна country має тип: ${typeof country}`);
-console.log(`Змінна population має тип: ${typeof population}`);
-console.log(`Змінна isCapital має тип: ${typeof isCapital}`);
-console.log(`Змінна nothing має тип: ${typeof nothing}`);
-console.log(`Змінна undefinedVar має тип: ${typeof undefinedVar}`);
-//////////////// Задача 3////////////////////////
-const price=79.99;
-const quantity=4;
-const total=price*quantity;
-console.log(`Загальна сума: ${total}`);
-console.log(`Ціла частина: ${Math.trunc(total)}`);
-console.log(`Сума з двома знаками: ${total.toFixed(2)}`);
-///////////////// Задача 4////////////////////////
-const birthYear=2007;
-const currentYear=2026;
-console.log(`Вам ${currentYear-birthYear} років.Через 10 років вам буде ${currentYear-birthYear+10} років.`);
-////////////////// Задача 5////////////////////////
-const totalSeconds = 10000;
-Math.trunc(totalSeconds / 3600);
-const hours = Math.trunc(totalSeconds / 3600);
-const minutes = Math.trunc((totalSeconds % 3600) / 60);
-const seconds = totalSeconds % 60;
-console.log(`Час: ${hours} годин, ${minutes} хвилин, ${seconds} секунд.`);
+////////////завдання 1//////////////
+let вибрати = Number(prompt("оберіть напій: 1 - кава, 2 - чай, 3 - сік"));
+let гроші = Number(prompt("введіть суму грошей"));
+let drink;
+let price;
+switch (вибрати) {
+  case 1:
+    drink = "кава";
+    price = 30;
+    break;
+  case 2:
+    drink = "чай";
+    price = 20;
+    break;
+  case 3:
+    drink = "сік";
+    price = 25;
+    break;
+  default:
+    console.log("Error: такого напою немає");
+}
+if (price >= 0) {
+  console.log(`Ви вибрали ${drink}. Ціна: ${price} грн.`);
+}
+if (гроші >= price) {
+  let change = гроші - price;
+  console.log(`Ви купили ${drink}. Здача: ${change} грн.`);
+  console.log("Напій готується...");
+}
+else {
+  console.log("Недостатньо грошей для покупки.");
+}
+////////////завдання 2//////////////
+let вік = Number(prompt("Введіть ваш вік"));
+if (вік < 0 || вік > 120) {
+  console.log("Помилка: нереальний вік");
+}
+else {
+  let result = вік >= 16 ? "Доступ дозволено" : "Доступ заборонено";
+  console.log(result);
+}
+///////////завдання 3//////////////
+let grade = prompt('Введіть оцінку (A, B, C, D, F):').toUpperCase();
+
+switch (grade) {
+  case 'A':
+    console.log("Відмінно");
+    break;
+  case 'B':
+    console.log("Добре");
+    break;
+  case 'C':
+    console.log("Задовільно");
+    break;
+  case 'D':
+    console.log("Незадовільно");
+    break;
+  case 'F':
+    console.log("Не склав(ла)");
+    break;
+  default:
+    console.log("Помилка: неправильна оцінка");
+}
+
+let scholarship = grade !== 'F' ? "Призначено стипендію" : "Стипендія відсутня";
+console.log(scholarship);
