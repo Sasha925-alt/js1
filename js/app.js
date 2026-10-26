@@ -1,66 +1,94 @@
-////////////завдання 1//////////////
-let вибрати = Number(prompt("оберіть напій: 1 - кава, 2 - чай, 3 - сік"));
-let гроші = Number(prompt("введіть суму грошей"));
-let drink;
-let price;
-switch (вибрати) {
-  case 1:
-    drink = "кава";
-    price = 30;
-    break;
-  case 2:
-    drink = "чай";
-    price = 20;
-    break;
-  case 3:
-    drink = "сік";
-    price = 25;
-    break;
-  default:
-    console.log("Error: такого напою немає");
-}
-if (price >= 0) {
-  console.log(`Ви вибрали ${drink}. Ціна: ${price} грн.`);
-}
-if (гроші >= price) {
-  let change = гроші - price;
-  console.log(`Ви купили ${drink}. Здача: ${change} грн.`);
-  console.log("Напій готується...");
-}
-else {
-  console.log("Недостатньо грошей для покупки.");
-}
-////////////завдання 2//////////////
-let вік = Number(prompt("Введіть ваш вік"));
-if (вік < 0 || вік > 120) {
-  console.log("Помилка: нереальний вік");
-}
-else {
-  let result = вік >= 16 ? "Доступ дозволено" : "Доступ заборонено";
-  console.log(result);
-}
-///////////завдання 3//////////////
-let grade = prompt('Введіть оцінку (A, B, C, D, F):').toUpperCase();
+/////////////////завдання 1//////////////////////
+const input = prompt("Введіть число:");
+let n = Math.abs(parseInt(input, 10));
 
-switch (grade) {
-  case 'A':
-    console.log("Відмінно");
-    break;
-  case 'B':
-    console.log("Добре");
-    break;
-  case 'C':
-    console.log("Задовільно");
-    break;
-  case 'D':
-    console.log("Незадовільно");
-    break;
-  case 'F':
-    console.log("Не склав(ла)");
-    break;
-  default:
-    console.log("Помилка: неправильна оцінка");
-}
+if (isNaN(n)) {
+    console.log("Це не число!");
+} else {
+    const isNegative = parseInt(input, 10) < 0;
+    let count = 0;
+    let reversed = 0;
 
-let scholarship = grade !== 'F' ? "Призначено стипендію" : "Стипендія відсутня";
-console.log(scholarship);
+    if (n === 0) {
+        count = 1;
+    }
+
+    while (n > 0) {
+        const digit = n % 10;
+        reversed = reversed * 10 + digit;
+        n = Math.floor(n / 10);
+        count++;
+    }
+
+    console.log("Кількість цифр: " + count);
+    console.log("Число навпаки: " + (isNegative ? "-" : "") + reversed);
+}
+//////////////завдання 2//////////////////////
+const secret = Math.floor(Math.random() * 100) + 1;
+const MAX_ATTEMPTS = 5;
+let guessed = false;
+
+for (let attempts = 1; attempts <= MAX_ATTEMPTS; attempts++) {
+    const input = prompt(
+        "Вгадайте число від 1 до 100 (спроба " + attempts + " з " + MAX_ATTEMPTS + "):"
+    );
+
+    if (input === null) {
+        alert("Гру перервано. Загадане число: " + secret);
+        guessed = true;
+        break;
+    }
+
+    const guess = parseInt(input, 10);
+
+    if (isNaN(guess) || guess < 1 || guess > 100) {
+        alert("Введіть ціле число від 1 до 100!");
+        attempts--;
+        continue;
+    }
+
+    if (guess < secret) {
+        alert("Більше!");
+    } else if (guess > secret) {
+        alert("Менше!");
+    } else {
+        alert("Вгадали! Кількість спроб: " + attempts);
+        guessed = true;
+        break;
+    }
+}
+if (!guessed) {
+    alert("Спроби закінчилися. Загадане число: " + secret);
+}
+////////////завдання 3//////////////////////
+let sum = 0;
+let count = 0;
+let max = -Infinity;
+let min = Infinity;
+let num;
+
+do {
+    num = parseFloat(prompt("Введіть число (0 для завершення):"));
+
+    if (isNaN(num)) {
+        alert("Це не число, спробуйте ще раз.");
+        num = NaN;
+        continue;
+    }
+
+    if (num !== 0) {
+        sum += num;
+        count++;
+        if (num > max) max = num;
+        if (num < min) min = num;
+    }
+} while (num !== 0);
+
+if (count === 0) {
+    console.log("Жодного числа не введено.");
+} else {
+    console.log("Сума: " + sum);
+    console.log("Середнє арифметичне: " + (sum / count));
+    console.log("Найбільше: " + max);
+    console.log("Найменше: " + min);
+}
